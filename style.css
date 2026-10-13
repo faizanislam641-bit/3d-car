@@ -1,0 +1,230 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  overflow: hidden;
+  background: #000;
+  font-family: "Segoe UI", Arial, sans-serif;
+  user-select: none;
+}
+canvas {
+  display: block;
+}
+
+/* ===== Splash ===== */
+#splash {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #0a1a2f 0%, #000 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: splashOut 1s ease 3.5s forwards;
+}
+#logoImg {
+  width: 220px;
+  animation: logoIn 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  filter: drop-shadow(0 0 30px #0af);
+}
+#logoText {
+  color: #0af;
+  font-size: 60px;
+  letter-spacing: 8px;
+  animation: logoIn 1.8s ease forwards;
+  text-shadow: 0 0 30px #0af;
+}
+@keyframes logoIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.2) rotate(-15deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1) rotate(3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+@keyframes splashOut {
+  to {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+}
+
+/* ===== Menu ===== */
+#menu {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 20, 40, 0.95),
+    rgba(0, 0, 0, 0.95)
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  z-index: 500;
+  color: #fff;
+  padding: 20px;
+}
+#menu h1 {
+  font-size: 32px;
+  letter-spacing: 3px;
+  color: #0af;
+  text-shadow: 0 0 20px #0af;
+}
+#carList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  max-width: 900px;
+  width: 100%;
+  max-height: 55vh;
+  overflow-y: auto;
+  padding: 10px;
+}
+.carCard {
+  padding: 14px;
+  border: 2px solid #333;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s;
+  background: #111;
+  text-align: center;
+  color: #ccc;
+  font-size: 13px;
+}
+.carCard:hover {
+  border-color: #0af;
+  transform: translateY(-3px);
+}
+.carCard.selected {
+  border-color: #0af;
+  background: linear-gradient(135deg, #0af, #06c);
+  color: #fff;
+  box-shadow: 0 0 25px #0af;
+}
+.carCard .swatch {
+  width: 60px;
+  height: 30px;
+  border-radius: 6px;
+  margin: 0 auto 8px;
+  box-shadow: inset 0 -6px 12px rgba(0, 0, 0, 0.5);
+}
+#startBtn {
+  padding: 16px 50px;
+  font-size: 20px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #0af, #06c);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #fff;
+  letter-spacing: 2px;
+  box-shadow: 0 0 25px rgba(0, 170, 255, 0.6);
+  transition: 0.3s;
+}
+#startBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 40px rgba(0, 170, 255, 1);
+}
+.hidden {
+  display: none !important;
+}
+
+/* ===== HUD ===== */
+#hud {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 100;
+  pointer-events: none;
+  color: #fff;
+}
+#speedo {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 170, 255, 0.4);
+  font-size: 28px;
+  font-weight: bold;
+  text-shadow: 0 0 10px #0af;
+  backdrop-filter: blur(8px);
+}
+#speedo small {
+  font-size: 12px;
+  opacity: 0.7;
+}
+#timeHud {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 200, 0, 0.4);
+  font-size: 16px;
+  backdrop-filter: blur(8px);
+}
+
+/* ===== Mobile Controls ===== */
+#mobileControls {
+  position: fixed;
+  bottom: 25px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 25px;
+  z-index: 200;
+  pointer-events: none;
+}
+#mobileControls > * {
+  pointer-events: auto;
+}
+.ctrl-right {
+  display: flex;
+  gap: 12px;
+}
+.ctrl-btn {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: bold;
+  user-select: none;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(10px);
+  transition: 0.1s;
+}
+.ctrl-btn:active {
+  background: rgba(0, 170, 255, 0.6);
+  transform: scale(0.9);
+}
+
+@media (max-width: 500px) {
+  #menu h1 {
+    font-size: 22px;
+  }
+  .ctrl-btn {
+    width: 62px;
+    height: 62px;
+    font-size: 22px;
+  }
+}

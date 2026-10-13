@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0"
+    />
+    <title>4D City Car Drive</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Splash Logo -->
+    <div id="splash">
+      <img
+        src="logo.png"
+        alt="Logo"
+        id="logoImg"
+        onerror="
+          this.style.display = 'none';
+          document.getElementById('logoText').style.display = 'block';
+        "
+      />
+      <h1 id="logoText" style="display: none">YOUR LOGO</h1>
+    </div>
+
+    <!-- Game Canvas -->
+    <canvas id="game"></canvas>
+
+    <!-- HUD -->
+    <div id="hud" class="hidden">
+      <div id="speedo"><span id="speedVal">0</span> <small>km/h</small></div>
+      <div id="timeHud">☀️ Day</div>
+    </div>
+
+    <!-- Car Select Menu -->
+    <div id="menu" class="hidden">
+      <h1>🏎️ SELECT YOUR CAR</h1>
+      <div id="carList"></div>
+      <button id="startBtn">▶ START DRIVING</button>
+    </div>
+
+    <!-- Mobile Controls -->
+    <div id="mobileControls" class="hidden">
+      <div class="ctrl-btn" id="leftBtn">◀</div>
+      <div class="ctrl-right">
+        <div class="ctrl-btn" id="brakeBtn">▼</div>
+        <div class="ctrl-btn" id="gasBtn">▲</div>
+        <div class="ctrl-btn" id="rightBtn">▶</div>
+      </div>
+    </div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="game.js"></script>
+  </body>
+</html>
